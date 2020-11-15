@@ -30,10 +30,10 @@ public class LimitedQueue<E> {
 
     public void add(E o) {
         if (currentQueueItem == null) {
-            currentQueueItem = new QueueItem<E>(o);
+            currentQueueItem = new QueueItem(o);
         }
         else {
-            currentQueueItem = new QueueItem<E>(o, currentQueueItem);
+            currentQueueItem = new QueueItem(o, currentQueueItem);
             // if we have add one extra item we have to delete the oldest one
             if (getSize() > limit) {
                 removeLast(currentQueueItem);
@@ -95,9 +95,6 @@ public class LimitedQueue<E> {
                 item.setParent(null);
             }
         }
-        else {
-            item = null;
-        }
     }
 
     private void removeAllAfterN(QueueItem<E> item, int n) {
@@ -110,9 +107,6 @@ public class LimitedQueue<E> {
                 removeAllAfterN(item.getParent(),n-1);
                 item.setParent(null);
             }
-        }
-        else {
-            item = null;
         }
     }
 
